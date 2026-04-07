@@ -28,8 +28,9 @@ DEBUG = os.getenv('APP_DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['127.0.0.1',os.getenv('APP_DOMAIN','localhost')]
 
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1', 'https://' + os.getenv('APP_DOMAIN','localhost')]
-
+# CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1', 'https://' + os.getenv('APP_DOMAIN','localhost')]
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1', 'https://' + os.getenv('APP_DOMAIN', 'localhost'), 'https://*.azurecontainerapps.io']
+ 
 
 # Application definition
 
@@ -80,8 +81,12 @@ WSGI_APPLICATION = 'job_board.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE' : 'django.db.backends.postgresql',
+        'NAME' : os.getenv('POSTGRES_DB'),
+        'USER' : os.getenv('POSTGRES_USER'),
+        'PASSWORD' : os.getenv('POSTGRES_PASSWORD'),
+        'HOST' : os.getenv('POSTGRES_HOST'),
+        'PORT' : os.getenv('POSTGRES_PORT','5432'),
     }
 }
 
