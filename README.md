@@ -10,3 +10,5 @@
 
 # Démarrer le server
 ```python manage.py runserver```
+
+# docker compose up --build -d
